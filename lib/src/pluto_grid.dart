@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' show Intl;
-import 'package:pluto_grid/pluto_grid.dart';
+import 'package:pluto_grid_plus/pluto_grid.dart';
 
 import 'helper/platform_helper.dart';
 import 'ui/ui.dart';
@@ -58,7 +58,7 @@ typedef PlutoSelectDateCallBack = Future<DateTime?> Function(
 /// Also, the popup to set the filter or column inside the grid is implemented through the setting of [PlutoGrid].
 class PlutoGrid extends PlutoStatefulWidget {
   const PlutoGrid({
-    Key? key,
+    super.key,
     required this.columns,
     required this.rows,
     this.columnGroups,
@@ -80,7 +80,7 @@ class PlutoGrid extends PlutoStatefulWidget {
     this.configuration = const PlutoGridConfiguration(),
     this.notifierFilterResolver,
     this.mode = PlutoGridMode.normal,
-  }) : super(key: key);
+  });
 
   /// {@template pluto_grid_property_columns}
   /// The [PlutoColumn] column is delivered as a list and can be added or deleted after grid creation.
@@ -1211,8 +1211,7 @@ class _GridContainer extends StatelessWidget {
   const _GridContainer({
     required this.stateManager,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1375,17 +1374,17 @@ abstract class PlutoGridOnRowCheckedEvent {
 /// Argument of [PlutoGrid.onRowChecked] callback when the checkbox of the row is tapped.
 class PlutoGridOnRowCheckedOneEvent extends PlutoGridOnRowCheckedEvent {
   const PlutoGridOnRowCheckedOneEvent({
-    required PlutoRow row,
-    required int rowIdx,
-    required bool? isChecked,
-  }) : super(row: row, rowIdx: rowIdx, isChecked: isChecked);
+    required PlutoRow super.row,
+    required int super.rowIdx,
+    required super.isChecked,
+  });
 }
 
 /// Argument of [PlutoGrid.onRowChecked] callback when all checkboxes of the column are tapped.
 class PlutoGridOnRowCheckedAllEvent extends PlutoGridOnRowCheckedEvent {
   const PlutoGridOnRowCheckedAllEvent({
-    bool? isChecked,
-  }) : super(row: null, rowIdx: null, isChecked: isChecked);
+    super.isChecked,
+  }) : super(row: null, rowIdx: null);
 }
 
 /// The argument of the [PlutoGrid.onRowDoubleTap] callback
